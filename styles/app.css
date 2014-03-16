@@ -95,8 +95,8 @@
 /* Chrome, Safari, Opera */
 @-webkit-keyframes rotateAnimation {
     from {  
-        -webkit-transform:  rotateY(180deg);
-        transform:          rotateY(180deg);
+        -webkit-transform:  rotateY(360deg);
+        transform:          rotateY(360deg);
     }
     to {
         -webkit-transform:  rotateY(0deg);
@@ -107,8 +107,8 @@
 /* Standard syntax */
 @keyframes rotateAnimation {
     from {  
-        -webkit-transform:  rotateY(180deg);
-        transform:          rotateY(180deg);
+        -webkit-transform:  rotateY(360deg);
+        transform:          rotateY(360deg);
     }
     to {
         -webkit-transform:  rotateY(0deg);
