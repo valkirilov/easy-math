@@ -1,0 +1,102 @@
+<div class="row" >
+  <div class="col-md-6 col-centered">
+    <div class="panel panel-danger">
+      <div class="panel-heading">Let's play <strong>Timelimit mode</strong> of easy-math</div>
+      <div class="panel-body">
+
+        <h4>Goal</h4>
+        <p class="text-justify">
+            In <strong>Timelimit mode</strong> your goal is to correctly compare as much more numbers as you can before the deadline time limit of 30 seconds expires.
+            During this time you have to achieve the highest possible score. <br />
+            <div class="alert alert-warning text-justify">
+                <strong>Warning:</strong>
+                Every correct answer gives you +10 points and a bonus of +0.5 seconds to your time but the incrrect answers
+                coasts you -1 second from your time and -5 points from your score so be careful and don't make mistakes.
+            </div>
+            
+        </p>
+        
+        <br />
+        
+        <button type="button" class="btn btn-success btn-lg" ng-click="startGame()">START</button>
+          
+        <br /><br />
+          
+          
+        <h4>Examples</h4>
+        <p class="text-justify">
+            Here are some examples which can help you to understand the goal of the game.<br />
+            If you have any troubles playing the game you can read the `How to play` anytime when you want, it's placed at the bottom of the page.
+        </p>    
+        
+        <div class="row examples">
+          
+        
+          <!-- Correct answers -->
+          <div class="col-xs-12 col-sm-4">
+            <div class="col-centered" style="width: 100px;">
+              <div class="result question true"> 21 </div>
+              <div class="result answer"><span class="glyphicon glyphicon-chevron-left"></span></div>
+              <div class="result question">27</div>
+              <span class="label label-success">correct answer</span>
+            </div>
+          </div>
+            
+          <div class="col-xs-12 col-sm-4">
+            <div class="col-centered" style="width: 100px;">
+              <div class="result question true"> 16 </div>
+              <div class="result answer"><span class="glyphicon glyphicon-chevron-right"></span></div>
+              <div class="result question">13</div>
+              <span class="label label-success">correct answer</span>
+            </div>
+          </div>
+        
+          <div class="col-xs-12 col-sm-4">
+            <div class="col-centered" style="width: 120px;">
+              <div class="result question true"> 3 </div>
+              <div class="result answer"><span class="glyphicon glyphicon-chevron-left"></span></div>
+              <div class="result answer"><span class="glyphicon glyphicon-chevron-right"></span></div>
+              <div class="result question true">3</div>
+              <span class="label label-success">correct answer</span>
+            </div>
+          </div>
+          
+          <br /><br /><br />
+        
+          <!-- Wrong answers -->
+          <div class="col-xs-12 col-sm-4">
+            <div class="col-centered" style="width: 100px;">
+              <div class="result question false"> 21 </div>
+              <div class="result answer"><span class="glyphicon glyphicon-chevron-right"></span></div>
+              <div class="result question">27</div>
+              <span class="label label-danger">wrong answer</span>
+            </div>
+          </div>
+            
+          <div class="col-xs-12 col-sm-4">
+            <div class="col-centered" style="width: 100px;">
+              <div class="result question false"> 16 </div>
+              <div class="result answer"><span class="glyphicon glyphicon-chevron-left"></span></div>
+              <div class="result question">13</div>
+              <span class="label label-danger">wrong answer</span>
+            </div>
+          </div>
+        
+          <div class="col-xs-12 col-sm-4">
+            <div class="col-centered" style="width: 120px;">
+              <div class="result question false"> 3 </div>
+              <div class="result answer"> &nbsp; &nbsp; <span class="glyphicon glyphicon-flag"></span> &nbsp; </div>
+              <div class="result question false">21</div>
+              <span class="label label-danger">wrong answer</span>
+            </div>
+          </div>
+            
+        </div>
+          
+        <br />
+        
+        
+      </div>
+    </div>
+  </div>
+</div>

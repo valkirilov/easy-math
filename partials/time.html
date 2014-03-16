@@ -1,0 +1,14 @@
+<!-- Timer is displayd here -->
+<div class="row">
+  <div class="col-xs-10 col-md-4 col-centered">
+    <h3>Remaining time</h3>
+    <div class="row timer {{ (time.sec <= 10 && time.min == 0) ? ((time.sec <= 3) ? 'shock' : 'critic') : '' }}">
+        <div class="col-xs-3 minutes">{{ time.min }}</div>
+        <div class="delimer">:</div>
+        <div class="col-xs-3 seconds">{{ time.sec }}</div>
+        <div class="delimer">:</div>
+        <div class="col-xs-4 milisec">{{ time.milisec }}</div>
+    </div>
+  </div>
+  <br />
+</div>

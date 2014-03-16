@@ -1,0 +1,315 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+.navbar-brand img {
+    margin-top: -6px;
+}
+.navbar-brand img:hover {
+    animation: rotateAnimation 0.3s linear;
+    -webkit-animation: rotateAnimation 0.3s linear;
+}
+
+.img-about {
+    margin: 10px;
+}
+
+/* Some styles for the examples */
+.examples .label {
+    width: 100px;
+    clear: both;
+    margin: 0px auto;
+    position: relative;
+    top: 5px !important;
+}
+
+/* These are the question classes */
+.question {
+    background: rgba(128, 128, 128, 0.1);
+    box-shadow: 0px 0px 21px rgba(128, 128, 128, 0.6);
+    
+    padding: 30px;
+    font-size: 5em;
+    
+    transition:         1s;
+    -webkit-transition: 1s;
+    -moz-transition:    1s;
+}
+.question.preview {
+    padding: 10px 30px;
+}
+
+/* Animations for this question elements*/
+.question.change {
+    animation:          rotateAnimation 0.3s;
+    -webkit-animation:  rotateAnimation 0.3s;
+}
+.result.question {
+    box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.6);
+    
+    float: left;
+    
+    padding: 5px;
+    font-size: 1em;
+}
+
+.answer-checked,
+.btn-answer:active {
+    box-shadow: inset 0px 0px 21px rgba(0, 0, 0, 0.6) !important;
+}
+
+.mute {
+    margin: 10px 50px;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rotateAnimation {
+    from {  
+        -webkit-transform:  rotateY(180deg);
+        transform:          rotateY(180deg);
+    }
+    to {
+        -webkit-transform:  rotateY(0deg);
+        transform:          rotateY(0deg);
+    }
+}
+
+/* Standard syntax */
+@keyframes rotateAnimation {
+    from {  
+        -webkit-transform:  rotateY(180deg);
+        transform:          rotateY(180deg);
+    }
+    to {
+        -webkit-transform:  rotateY(0deg);
+        transform:          rotateY(0deg);
+    }
+}
+
+.question.true {
+    background-color:   rgba(0, 128, 0, 0.1);
+    box-shadow:         0px 0px 21px rgba(0, 128, 0, 0.6);
+}
+.question.false {
+    background-color:   rgba(128, 0, 0, 0.1);
+    box-shadow:         0px 0px 21px rgba(128, 0, 0, 0.6);
+}
+
+.result.question.true {
+    /*background-color:   rgba(0, 128, 0, 0.1);*/
+    border:             1px solid rgba(0, 128, 0, 0.3);
+    box-shadow:         0px 0px 6px rgba(0, 128, 0, 0.6);
+}
+.result.question.false {
+    /*background-color:   rgba(128, 0, 0, 0.1);*/
+    border:             1px solid rgba(128, 0, 0, 0.3);
+    box-shadow:         0px 0px 6px rgba(128, 0, 0, 0.6);
+}
+
+/* These are the answer classes */
+.answer {
+    margin-top: 30px;
+}
+.result.answer {
+    margin: 5px;
+    float: left;
+    
+}
+
+/* This is the li of the results and the animations for them */
+.results li {
+    width: 120px;
+    position: relative;
+    list-style-type: none;
+    
+    margin: 5px 20px;
+    text-align: center;
+    float: left;
+}
+
+.results li.ng-enter {
+    transition:         1s;
+    -webkit-transition: 1s;
+    -moz-transition:    1s;
+    
+    opacity: 0;
+}
+.results li.ng-enter-active {
+    opacity: 1;
+}
+
+.btn-answer {
+    padding: 20px !important;
+    margin: 5px;
+}
+
+.col-centered {
+    margin: 10px auto !important;
+    float: none !important;
+    position: relative;
+    text-align: center;
+    
+}
+.clearer {
+    clear: both;   
+}
+
+.score {
+    transition: 3s;
+    -webkit-transition:: 3s;
+    -moz-transition:: 3s;
+    
+    font-size: 48px;
+    line-height: 48px;
+    padding: 10px !important;
+}
+.score.update {
+    animation: updateScore 0.5s;
+    -webkit-animation: updateScore 0.5s;
+}
+.score.final {
+    font-size: 92pt;
+    line-height: 92pt;
+    color: #2ecc71;
+}
+
+/* Timer styles */
+.timer {
+    background: #ecf0f1;
+    border: 3px solid #bdc3c7;
+    
+    margin: 10px auto;
+    
+    border-radius: 9px;
+    color: #2c3e50;
+    
+    transition:         1s;
+    -webkit-transition: 1s;
+    -moz-transition:    1s;
+}
+.timer.critic {
+    background: #f1c40f;
+    border: 3px solid #f39c12;
+}
+.timer.shock {
+    animation: timerShock 1s infinite;
+    -webkit-animation: timerShock 1s infinite;
+}
+
+.timer div {
+    font-size: 42pt;
+    position: relative;
+    text-align: center;
+    margin: 2px;
+}
+.timer .delimer {
+    font-weight: bolder;
+    width: 10px;
+    margin-top: 10px;
+    float: left;
+    font-size: 3em;
+}
+
+.timer .milisec { color: #666666; }
+.timer .seconds { color: #333333; }
+.timer .minutes { color: #666666; }
+
+.timer.critic .milisec { color: #d35400; }
+.timer.critic .seconds { color: #c0392b; }
+.timer.critic .minutes { color: #d35400; }
+
+.timer.shock .milisec { color: #aaaaaa; }
+.timer.shock .seconds { color: #ffffff; }
+.timer.shock .minutes { color: #aaaaaa; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes timerShock {
+    0% {
+        background: #e74c3c;
+        border-color: #c0392b;
+    }
+    50% {  
+        background: #f1c40f;
+        border-color: #f39c12;
+    }
+    100% {
+        background: #e74c3c;
+        border-color: #c0392b;
+    }
+}
+
+/* Standard syntax */
+@keyframes timerShock {
+    0% {
+        background: #e74c3c;
+        border-color: #c0392b;
+    }
+    50% {  
+        background: #f1c40f;
+        border-color: #f39c12;
+    }
+    100% {
+        background: #e74c3c;
+        border-color: #c0392b;
+    }
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes updateScore {
+    from {  
+        font-size: 8px;
+        color: #f39c12;
+    }
+    to {
+        font-family: 48px;
+        color: #2ecc71;
+    }
+}
+
+/* Standard syntax */
+@keyframes updateScore {
+    from {  
+        font-size: 8px;
+        color: #f39c12;
+    }
+    to {
+        font-family: 48px;
+        color: #2ecc71;
+    }
+}
+
+.footer {
+    margin-top: 50px;
+    
+    color: #999999;
+}
