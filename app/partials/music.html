@@ -1,0 +1,10 @@
+
+<div class="btn-group mute">
+    <button type="button" class="btn {{ (mute.sounds) ? 'btn-danger' : 'btn-default' }}" ng-model="mute.sounds" ng-change="changeMute()" btn-checkbox>
+        <span class="glyphicon glyphicon-music"></span>
+    </button>
+    <button type="button" class="btn {{ (mute.music) ? 'btn-danger' : 'btn-default' }}" ng-model="mute.music" ng-change="changeMute()" btn-checkbox>
+        <span class="glyphicon glyphicon-volume-off" ng-show="mute.music === true"></span> 
+        <span class="glyphicon glyphicon-volume-up" ng-show="mute.music === false"></span>
+    </button>
+</div>

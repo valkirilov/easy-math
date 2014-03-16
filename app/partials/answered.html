@@ -1,0 +1,30 @@
+<div class="row">
+  <br /><br /><br />
+  <h3>Your answers</h3>
+    
+  <!-- Status bar -->  
+  <div class="col-md-6 col-centered">
+    <div class="progress active">
+      <div ng-repeat="question in questions | filterAnswered" class="progress-bar {{ question.style }}" style="width: {{ 100 / questions.length }}%">
+        <span ng-show="question.isTrue && questions.length<30">+10</span>
+        <span ng-show="question.isTrue===false && questions.length<30">-5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answered questions -->
+  <div class="col-md-6 col-centered">
+  <ul class="results">
+    <li ng-repeat="question in questions | filterAnswered">
+        <div class="result question {{ question.isTrue }}">{{ question.option1 }} </div>
+        <div class="result answer">
+            <span ng-show="question.answer == '?'" class="glyphicon glyphicon-flag"></span>
+            <span ng-show="question.answer != '?'" class="glyphicon glyphicon-chevron-{{ (question.answer == '<') ? 'left' : 'right' }}"></span>
+        </div>
+        <div class="result question {{ question.isTrue }}">{{ question.option2 }}</div>	
+    </li>
+  </ul>
+  </div>
+    
+  <br /><br /><br />
+</div>
