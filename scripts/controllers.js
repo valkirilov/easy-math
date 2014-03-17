@@ -91,6 +91,7 @@ angular.module('easyMath.controllers', []).
         
         $scope.$watch(function () { return GameClassicFactory.currentQuestion; },
             function (value) {
+                console.log('Value is changed');
                 $scope.currentQuestion = value;
                 $scope.rotateQuestions(); // Apply the animation
             }
@@ -200,6 +201,7 @@ angular.module('easyMath.controllers', []).
         
         // Animations
         $scope.rotateQuestions = function() {
+            console.log('Change called');
             if ($scope.option1 === undefined || $scope.option2 === undefined) {
                 $scope.option1 = angular.element("#option1");
                 $scope.option2 = angular.element("#option2");
@@ -216,9 +218,11 @@ angular.module('easyMath.controllers', []).
                 $scope.option2.removeClass('change');
             }
             
+            /*
             if ($scope.option2.hasClass('change')) {
                 removeChange();
             }
+            */
             
             addChange();
             setTimeout(function() {
@@ -239,7 +243,7 @@ angular.module('easyMath.controllers', []).
             addChange();
             setTimeout(function() {
                 removeChange();
-            }, 500);
+            }, 600);
         };
         
         $scope.keyIsDown = function(event) {

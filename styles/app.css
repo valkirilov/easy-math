@@ -58,8 +58,9 @@
     background: rgba(128, 128, 128, 0.1);
     box-shadow: 0px 0px 21px rgba(128, 128, 128, 0.6);
     
-    padding: 30px;
-    font-size: 5em;
+    padding: 10px 20px;
+    font-size: 3em;
+    
     
     transition:         1s;
     -webkit-transition: 1s;
@@ -69,10 +70,25 @@
     padding: 10px 30px;
 }
 
+/* Here are the media queries for bigger screens*/ 
+@media (min-width: 768px) {
+    .question {
+        padding: 30px;
+        font-size: 5em;
+    }
+}
+
 /* Animations for this question elements*/
 .question.change {
-    animation:          rotateAnimation 0.3s;
-    -webkit-animation:  rotateAnimation 0.3s;
+    animation:          rotateAnimation 0.5s;
+    -webkit-animation:  rotateAnimation 0.5s;
+    
+    /*
+    transform:          rotateY(0deg);
+    -webkit-transform:  rotateY(0deg);
+    -moz-transform:     rotateY(0deg);
+    */
+    
 }
 .result.question {
     box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.6);
@@ -94,11 +110,15 @@
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes rotateAnimation {
-    from {  
+    0% {  
         -webkit-transform:  rotateY(360deg);
         transform:          rotateY(360deg);
-    }
-    to {
+    },
+    5% {
+        -webkit-transform:  rotateY(180deg);
+        transform:          rotateY(180deg);
+    },
+    100% {
         -webkit-transform:  rotateY(0deg);
         transform:          rotateY(0deg);
     }
@@ -106,12 +126,16 @@
 
 /* Standard syntax */
 @keyframes rotateAnimation {
-    from {  
-        -webkit-transform:  rotateY(360deg);
+    0% {  
+        -moz-transform:  rotateY(360deg);
         transform:          rotateY(360deg);
-    }
-    to {
-        -webkit-transform:  rotateY(0deg);
+    },
+    5% {
+        -moz-transform:  rotateY(180deg);
+        transform:          rotateY(180deg);
+    },
+    100% {
+        -moz-transform:  rotateY(0deg);
         transform:          rotateY(0deg);
     }
 }
