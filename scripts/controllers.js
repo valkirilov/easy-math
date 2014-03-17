@@ -8,10 +8,9 @@ angular.module('easyMath.controllers', []).
 
         $scope.questions = null;
         $scope.currentQuestion = null;
-        $scope.previewEnabled = false;
 
         $scope.init = function() {
-        
+            $scope.previewEnabled = true;
             $scope.generateQuestion();
             $interval($scope.generateQuestion, 3000);
             $timeout($scope.solveQuestion, 1500);
@@ -24,9 +23,9 @@ angular.module('easyMath.controllers', []).
         };
         
         $scope.generateQuestion = function() {
-            if ($scope.previewEnabled === true) {
+            if ($location.path() === '/home') {
                 $scope.currentQuestion = QuestionsService.generateQuestion(1);
-                $scope.rotateQuestion();
+                $scope.rotatePreview();
             }
         };
         
@@ -37,6 +36,31 @@ angular.module('easyMath.controllers', []).
             $timeout($scope.solveQuestion, 3000);
         };
                                       
+        $scope.rotatePreview = function() {
+
+            $scope.option1 = angular.element("#option1");
+            $scope.option2 = angular.element("#option2");
+
+            var addChange = function() {
+                $scope.option1.addClass('change');
+                setTimeout(function() {    
+                    $scope.option2.addClass('change');
+                }, 100);
+            }
+            var removeChange = function() {
+                $scope.option1.removeClass('change');
+                $scope.option2.removeClass('change');
+            }
+            
+            if ($scope.option2.hasClass('change')) {
+                removeChange();
+            }
+            
+            addChange();
+            setTimeout(function() {
+                removeChange();
+            }, 500);
+        };
         var getRandom = function (max) {
             return Math.floor(Math.random() * max);
         };
@@ -59,28 +83,16 @@ angular.module('easyMath.controllers', []).
         });
 
     }]).
-    controller('TimelimitController', ['$scope', '$route', '$timeout', '$location', 'QuestionsService', 'TimerService', 'GameClassicFactory', 'SoundsService',
-                                       function($scope, $route, $timeout, $location, QuestionsService, TimerService, GameClassicFactory, SoundsService) {
+    controller('TimelimitController', ['$scope', '$route', '$timeout', '$interval', '$location', 'QuestionsService', 'TimerService', 'GameClassicFactory', 'SoundsService',
+                                       function($scope, $route, $timeout, $interval, $location, QuestionsService, TimerService, GameClassicFactory, SoundsService) {
 
         // Watch for changes in views and call init function when the view is loaded
         $scope.$watch('$viewContentLoaded', function(){
             $scope.init();
-            
-            console.log($location.path());
-            if ($location.path() === '/home') {
-                console.log('Preview enabled');
-                $scope.previewEnabled = true;
-            }
-            else {
-                console.log('Preview disabled');
-                $scope.previewEnabled = false;
-            }
-            
         });
         
         $scope.$watch(function () { return GameClassicFactory.currentQuestion; },
             function (value) {
-                console.log('Value is changed');
                 $scope.currentQuestion = value;
                 $scope.rotateQuestions(); // Apply the animation
             }
@@ -125,6 +137,7 @@ angular.module('easyMath.controllers', []).
                                            
 
         $scope.init = function() {
+            
             if ($route.current.templateUrl === 'partials/mode-classic.html') {
                 $scope.mode = { type: 'classic', time: { min: 1, sec: 30 }};
             }
@@ -190,8 +203,6 @@ angular.module('easyMath.controllers', []).
         
         // Animations
         $scope.rotateQuestions = function() {
-            
-            console.log('Change called');
             if ($scope.option1 === undefined || $scope.option2 === undefined) {
                 $scope.option1 = angular.element("#option1");
                 $scope.option2 = angular.element("#option2");
@@ -208,10 +219,16 @@ angular.module('easyMath.controllers', []).
                 $scope.option2.removeClass('change');
             }
             
+            /*
+            if ($scope.option2.hasClass('change')) {
+                removeChange();
+            }
+            */
+            
             addChange();
             setTimeout(function() {
                 removeChange();
-            }, 600);
+            }, 500);
         };
         $scope.updateScore = function() {
             $scope.scoreDiv = angular.element(".score");
