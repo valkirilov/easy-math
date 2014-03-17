@@ -66,6 +66,7 @@ angular.module('easyMath.controllers', []).
         $scope.$watch('$viewContentLoaded', function(){
             $scope.init();
             
+            console.log($location.path());
             if ($location.path() === '/home') {
                 console.log('Preview enabled');
                 $scope.previewEnabled = true;
