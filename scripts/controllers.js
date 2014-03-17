@@ -24,10 +24,10 @@ angular.module('easyMath.controllers', []).
         };
         
         $scope.generateQuestion = function() {
-            $scope.currentQuestion = QuestionsService.generateQuestion(1);
-            
-            if ($scope.previewEnabled == true)
+            if ($scope.previewEnabled === true) {
+                $scope.currentQuestion = QuestionsService.generateQuestion(1);
                 $scope.rotateQuestion();
+            }
         };
         
         $scope.solveQuestion = function() {
@@ -67,9 +67,11 @@ angular.module('easyMath.controllers', []).
             $scope.init();
             
             if ($location.path() === '/home') {
-                $scope.previewEnabled = false;
+                console.log('Preview enabled');
+                $scope.previewEnabled = true;
             }
             else {
+                console.log('Preview disabled');
                 $scope.previewEnabled = false;
             }
             
