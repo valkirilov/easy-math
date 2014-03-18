@@ -138,7 +138,7 @@ easyMathServices.service('QuestionsService', function(){
         return getRandom(max);
     };
     var getFloatRandom = function(max, precision) {
-        return (Math.random() * max).toPrecision(precision);
+        return parseFloat((Math.random() * max).toPrecision(precision));
     };
 
     // This is function that generates question
@@ -180,12 +180,12 @@ easyMathServices.service('QuestionsService', function(){
                 precision = 4;
                 max = 50;
                 break;
-            case 7: 
+            case 8: 
                 randomizer = getFloatRandom;
                 precision = 5;
                 max = 50;
                 break;
-            case 8: 
+            case 9: 
                 randomizer = getFloatRandom;
                 precision = 5;
                 max = 100;
@@ -209,8 +209,8 @@ easyMathServices.service('QuestionsService', function(){
         // 1. Find the valid answer
         // 2. Compare it with the given one
         
-        var validAnswer = (question.option1 >= question.option2) ? '>' : '<';
-        question.isTrue = (question.answer == validAnswer) ? true : false;
+        var validAnswer = (question.option1 > question.option2) ? '>' : '<';
+        question.isTrue = (answer == validAnswer) ? true : false;
         
         // If the options are equal we have a special case
         question.isTrue = (question.option1 === question.option2) ? true : question.isTrue;

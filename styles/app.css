@@ -70,14 +70,6 @@
     padding: 10px 30px;
 }
 
-/* Here are the media queries for bigger screens*/ 
-@media (min-width: 768px) {
-    .question {
-        padding: 30px;
-        font-size: 5em;
-    }
-}
-
 /* Animations for this question elements*/
 .question.change {
     animation:          rotateAnimation 0.5s;
@@ -162,7 +154,7 @@
 
 /* These are the answer classes */
 .answer {
-    margin-top: 30px;
+    margin-top: 0px;
 }
 .result.answer {
     margin: 5px;
@@ -217,6 +209,9 @@
     line-height: 48px;
     padding: 10px !important;
 }
+.score.negative {
+    color: #e74c3c !important;
+}
 .score.update {
     animation: updateScore 0.5s;
     -webkit-animation: updateScore 0.5s;
@@ -251,17 +246,20 @@
 }
 
 .timer div {
-    font-size: 42pt;
+    height: 30pt;
+    font-size: 21pt;
     position: relative;
     text-align: center;
     margin: 2px;
+    padding: 0;
 }
 .timer .delimer {
     font-weight: bolder;
     width: 10px;
-    margin-top: 10px;
+    margin-bottom: 14px;
     float: left;
-    font-size: 3em;
+    font-size: 21pt;
+    height: 21pt;
 }
 
 .timer .milisec { color: #666666; }
@@ -316,7 +314,7 @@
     }
     to {
         font-family: 48px;
-        color: #2ecc71;
+        color: #f39c12;
     }
 }
 
@@ -328,7 +326,7 @@
     }
     to {
         font-family: 48px;
-        color: #2ecc71;
+        color: #f39c12;
     }
 }
 
@@ -336,4 +334,32 @@
     margin-top: 50px;
     
     color: #999999;
+}
+
+/* Here are the media queries for bigger screens*/ 
+@media (min-width: 768px) {
+    .question {
+        padding: 30px;
+        font-size: 5em;
+    }
+    
+    .answer {
+        margin-top: 30px;
+    }
+    
+    
+    .timer {
+        margin: 10px auto;
+    }
+    .timer div {
+        font-size: 42pt;
+        position: relative;
+        text-align: center;
+        margin: 2px;
+    }
+    .timer .delimer {
+        margin-bottom: 26px;
+        font-size: 42pt;
+        height: 42pt;
+    }
 }

@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-xs-10 col-md-4 col-centered">
     <h3>Your score</h3>
-    <div class="well score">
+    <div class="well score {{ (score <= 0) ? 'negative' : '' }}">
         {{ score }}
     </div>
   </div>

@@ -191,7 +191,6 @@ angular.module('easyMath.controllers', []).
                 case 'timelimit':
                     if (answer) {
                         GameClassicFactory.TimerService.addTime(0,0.5);
-                        console.log('add time');
                     }
                     break;
             }
@@ -224,6 +223,7 @@ angular.module('easyMath.controllers', []).
                 removeChange();
             }
             */
+            
             
             addChange();
             setTimeout(function() {
