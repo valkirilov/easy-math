@@ -3,11 +3,24 @@
 /* Controllers */
 
 angular.module('easyMath.controllers', []).
-    controller('HomeController', ['$scope', '$timeout', '$interval', '$location', '$anchorScroll', 'QuestionsService', 
-                                  function($scope, $timeout, $interval, $location, $anchorScroll, QuestionsService) {
+    controller('HomeController', ['$scope', '$timeout', '$interval', '$location', '$anchorScroll', 'QuestionsService', 'DatabaseService', 'HighScoreService', 
+                                  function($scope, $timeout, $interval, $location, $anchorScroll, QuestionsService, DatabaseService, HighScoreService) {
 
         $scope.questions = null;
         $scope.currentQuestion = null;
+          
+        $scope.$watch(function () { return HighScoreService.timelimitUpdated; },
+            function (value) {
+                console.log('Timelimit updated');
+                $scope.timelimitScores = HighScoreService.timelimitScores;
+            }
+        );
+        $scope.$watch(function () { return HighScoreService.classicUpdated; },
+            function (value) {
+                console.log('Classic updated');
+                $scope.classicScores = HighScoreService.classicScores;
+            }
+        );
 
         $scope.init = function() {
             $scope.previewEnabled = true;
@@ -20,6 +33,9 @@ angular.module('easyMath.controllers', []).
 
             //$scope.currentQuestion = GameClassicFactory.currentQuestion;
             
+            // Select and display the highscore table
+            HighScoreService.init();
+
         };
         
         $scope.generateQuestion = function() {
@@ -71,6 +87,9 @@ angular.module('easyMath.controllers', []).
             // call $anchorScroll()
             $anchorScroll();    
         };
+        $scope.updateHighscores = function() {
+            HighScoreService.fetchTimelimit();  
+        };
         
         $scope.init();
         
@@ -83,8 +102,10 @@ angular.module('easyMath.controllers', []).
         });
 
     }]).
-    controller('TimelimitController', ['$scope', '$route', '$timeout', '$interval', '$location', 'QuestionsService', 'TimerService', 'GameClassicFactory', 'SoundsService',
-                                       function($scope, $route, $timeout, $interval, $location, QuestionsService, TimerService, GameClassicFactory, SoundsService) {
+    controller('TimelimitController', ['$scope', '$route', '$timeout', '$interval', '$location', 'QuestionsService', 'TimerService', 
+                                       'GameClassicFactory', 'SoundsService', 'DatabaseService', 'NameService', 'HighScoreService',
+                                       function($scope, $route, $timeout, $interval, $location, QuestionsService, TimerService, 
+                                                 GameClassicFactory, SoundsService, DatabaseService, NameService, HighScoreService) {
 
         // Watch for changes in views and call init function when the view is loaded
         $scope.$watch('$viewContentLoaded', function(){
@@ -102,6 +123,19 @@ angular.module('easyMath.controllers', []).
                 $scope.questions = value;
             }
         );
+                                           
+        // Watch for changes in high score
+        $scope.$watch(function () { return HighScoreService.timelimitUpdated; },
+            function (value) {
+                $scope.highscores = HighScoreService.timelimitScores;
+            }
+        );
+        $scope.$watch(function () { return HighScoreService.classicUpdated; },
+            function (value) {
+                $scope.highscores = HighScoreService.classicScores;
+            }
+        );
+                                           
         $scope.$watch(function () { return GameClassicFactory.gameStatus; },
             function (value) {
                 $scope.gameStatus = value;
@@ -111,6 +145,25 @@ angular.module('easyMath.controllers', []).
                     angular.element('.score').addClass('final');
                     $scope.final = GameClassicFactory.final;
                     SoundsService.playFinish();
+                    
+                    // Generate name and save the result
+                    var name = NameService.getName();
+                    var newScore = [ null, name, $scope.score, new Date().toDateString(), 'ip here'];
+                    var tableName = ($scope.mode.type == 'classic') ? 'score_classic' : 'score_timelimit';
+                    
+                    DatabaseService.addTableData(tableName, newScore, function(success) {
+                        $scope.currentScore = DatabaseService.getLatestAddedId();
+
+                        if ($scope.mode.type == 'timelimit') {
+                            HighScoreService.fetchTimelimit();  
+                            $timeout(HighScoreService.fetchTimelimit, 300);
+                        }
+                        else if ($scope.mode.type == 'classic') {
+                            HighScoreService.fetchClassic();  
+                            $timeout(HighScoreService.fetchClassic, 300);
+                        }
+                        
+                    });
                 }
             }
         );
@@ -123,12 +176,17 @@ angular.module('easyMath.controllers', []).
                 sec: (value <= 3600) ? parseInt(value/1000) : parseInt((value-(Math.floor(value/60000)*60000))/1000), 
                 milisec: value%1000 }; }
         );
+                                           
+        
+
+
         
         // Some controller values
         $scope.questions = null;
         $scope.currentQuestion = null;
         $scope.time = 0;
         $scope.mode = null;
+        $scope.highscores = null;
                                            
         $scope.mute = {
             music: false,
@@ -138,15 +196,20 @@ angular.module('easyMath.controllers', []).
 
         $scope.init = function() {
             
+            HighScoreService.init();
+            
             if ($route.current.templateUrl === 'partials/mode-classic.html') {
                 $scope.mode = { type: 'classic', time: { min: 1, sec: 30 }};
+                HighScoreService.fetchClassic();
             }
             else if ($route.current.templateUrl === 'partials/mode-timelimit.html') {
                 $scope.mode = { type: 'timelimit', time: { min: 0, sec: 30 }};
+                HighScoreService.fetchTimelimit();
             }
 
             GameClassicFactory.initGame(QuestionsService, TimerService, $scope.mode.time);
             SoundsService.playTheme();
+            
 
             $scope.currentQuestion = GameClassicFactory.currentQuestion;
             

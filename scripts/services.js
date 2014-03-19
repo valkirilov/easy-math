@@ -51,6 +51,113 @@ easyMathServices.service('TimerService', function($timeout) {
 });
 
 
+easyMathServices.service('NameService', function($timeout) {
+    
+    var objects = ['Lion', 'Beef', 'Bed', 'Cow' ,'Bananas', 'Hamster', 'Rhino', 'Knife', 'Tiger', 
+                   'Phone', 'Dog', 'Bottle', 'Squirrel', 'Crow', 'Apple', 'Sheep', 'Panda', 
+                   'Zebra', 'Lamp', 'Giraffe', 'Chicken', '', '', '', ''];
+    
+    var adjectives = ['impossible', 'inexpensive', 'innocent', 'inquisitive', 'modern', 'mushy', 'odd', 
+                      'open', 'outstanding', 'poor', 'powerful', 'prickly', 'puzzled', 'real', 'rich', 
+                      'shy', 'sleepy', 'stupid', 'super', 'talented', 'tame', 'tender', 'tough', 
+                      'uninterested', 'vast', 'wandering', 'wild', 'wrong'];
+    
+    var getRandom = function (max) {
+        return Math.floor(Math.random() * max);
+    };
+    
+    var getName = function() {
+        var name = adjectives[getRandom(adjectives.length)] + ' ' + objects[getRandom(objects.length)];
+        return name;
+    };
+    
+    this.getName = getName;
+    
+});
+
+easyMathServices.service('DatabaseService', function($timeout) {
+    
+    var uid = 'p0000001362';
+    var authcode = '-';
+    var rdb = new SQLEngine(uid,authcode,'www.rdbhost.com');
+
+    var latestId = 0;
+    
+    var getTableData = function(table, options, callback) {
+        var query = 'SELECT * FROM '+table+' '+options;
+        var res2 = rdb.query( {
+            'callback' : callback,
+            'q' : query } );
+    };
+    
+    var addTableData = function(table, data, callback) {
+        
+        getTableData(table, 'ORDER BY id DESC LIMIT 1', function(success) {
+            if (success.records.rows)
+                data[0] = (parseInt(success.records.rows[0][0]))+1;
+            else 
+                data[0] = 1;
+            latestId = data[0];
+            
+            var query = 'INSERT INTO '+table+' VALUES (%s, %s, %s, %s, %s)';
+            var res = rdb.query( {
+                'callback' : callback,
+                'q' : query,
+                'args': data} );  
+        }) + 1;
+    };
+    
+    var getLatestAddedId = function() {
+        return latestId;    
+    };
+    
+    this.getTableData = getTableData;
+    this.addTableData = addTableData;
+    this.getLatestAddedId = getLatestAddedId;
+    
+});
+
+easyMathServices.factory('HighScoreService', function(DatabaseService) {
+    
+    var highscores = {}; 
+    
+    highscores.timelimitScores = null;
+    highscores.classicScores = null;
+    
+    highscores.timelimitUpdated = 0;
+    highscores.classicUpdated = 0;
+    
+    var fetchClassic = function() {
+        // Select and display the highscore table
+        DatabaseService.getTableData('score_classic', 'ORDER BY SCORE DESC LIMIT 10', function(success) {
+            highscores.classicScores = success.records.rows;
+            highscores.classicUpdated++;
+        });
+    };
+    var fetchTimelimit = function() {
+        // Select and display the highscore table
+        DatabaseService.getTableData('score_timelimit', 'ORDER BY SCORE DESC LIMIT 10', function(success) {
+            highscores.timelimitScores = success.records.rows;
+            highscores.timelimitUpdated++;
+        });
+        
+    };
+    
+    var init = function() {
+        fetchClassic();
+        fetchTimelimit();
+    };
+    
+    highscores.init = init;
+    highscores.fetchClassic = fetchClassic;
+    highscores.fetchTimelimit = fetchTimelimit;
+    
+    
+    return highscores;
+});
+
+
+
 easyMathServices.service('SoundsService', function($timeout) {
     
     // Resources

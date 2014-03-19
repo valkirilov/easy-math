@@ -1,6 +1,8 @@
 <div class="row">
     <h1>{{ final.title }}</h1>
     <p>{{ final.message }}</p>
+
+    
     <p>Great game, you can try to beat your own score or try the other modes of the game.</p>
     <p>If you like the game you can share it or you can contribute in GitHub.</p>
     
@@ -12,5 +14,10 @@
     <br /><br />
     
     <div ng-include src="'partials/share.html'"></div>
+    
+    <br /><br />
+    
+    <div ng-include src="'partials/mode-highscore.html'"></div>
+    
     
 </div>
