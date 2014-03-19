@@ -19,7 +19,7 @@
                     <td><strong>Name</strong></td>
                     <td><strong>Score</strong></td>
                 </tr>
-                <tr ng-repeat="result in classicScores track by $index">
+                <tr ng-repeat="result in classicScores track by $index" class="{{ (playerName == result[1]) ? 'info' : '' }}">
                     <td><strong>{{ $index+1 }}</strong></td>
                     <td class="text-left">{{ result[1] }}</td>
                     <td>{{ result[2] }}</td>
@@ -46,7 +46,7 @@
                     <td><strong>Name</strong></td>
                     <td><strong>Score</strong></td>
                 </tr>
-                <tr ng-repeat="result in timelimitScores track by $index">
+                <tr ng-repeat="result in timelimitScores track by $index" class="{{ (playerName == result[1]) ? 'info' : '' }}">
                     <td><strong>{{ $index+1 }}</strong></td>
                     <td class="text-left">{{ result[1] }}</td>
                     <td>{{ result[2] }}</td>

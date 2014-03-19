@@ -117,7 +117,7 @@ easyMathServices.service('DatabaseService', function($timeout) {
     
 });
 
-easyMathServices.factory('HighScoreService', function(DatabaseService) {
+easyMathServices.factory('HighScoreService', function(DatabaseService, $cookies, $cookieStore) {
     
     var highscores = {}; 
     
@@ -126,6 +126,10 @@ easyMathServices.factory('HighScoreService', function(DatabaseService) {
     
     highscores.timelimitUpdated = 0;
     highscores.classicUpdated = 0;
+    
+    highscores.playerName = $cookieStore.get('playerName');
+    highscores.classicYourScore = $cookieStore.get('classicScore');
+    highscores.timelimitYourScore = $cookieStore.get('timelimitScore');
     
     var fetchClassic = function() {
         // Select and display the highscore table

@@ -5,6 +5,7 @@
 angular.module('easyMath', [
 	'ngRoute',
     'ngAnimate',
+    'ngCookies',
 	'easyMath.filters',
 	'easyMath.services',
 	'easyMath.directives',
