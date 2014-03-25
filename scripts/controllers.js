@@ -115,6 +115,9 @@ angular.module('easyMath.controllers', []).
             $scope.init();
         });
         
+        $scope.watching = {  };
+                 
+       /*
         $scope.$watch(function () { return GameClassicFactory.currentQuestion; },
             function (value) {
                 $scope.currentQuestion = value;
@@ -126,6 +129,7 @@ angular.module('easyMath.controllers', []).
                 $scope.questions = value;
             }
         );
+        */
                                            
         // Watch for changes in high score
         $scope.$watch(function () { return HighScoreService.timelimitUpdated; },
@@ -179,24 +183,26 @@ angular.module('easyMath.controllers', []).
                 }
             }
         );
+                                           
+        /*
         $scope.$watch(function () { return GameClassicFactory.score; },
             function (value) { $scope.score = value; $scope.updateScore(); }
         );
+               */                                /*
         $scope.$watch(function () { return GameClassicFactory.time; },
             function (value) { $scope.time = { 
                 min: Math.floor(value/60000), 
                 sec: (value <= 3600) ? parseInt(value/1000) : parseInt((value-(Math.floor(value/60000)*60000))/1000), 
                 milisec: value%1000 }; }
         );
-                                           
-        
-
+        */
 
         
         // Some controller values
-        $scope.questions = null;
-        $scope.currentQuestion = null;
-        $scope.time = 0;
+        //$scope.questions = null;
+        //$scope.currentQuestion = null;
+
+        $scope.game = GameClassicFactory;
         $scope.mode = null;
         $scope.highscores = null;
                                            
@@ -245,6 +251,10 @@ angular.module('easyMath.controllers', []).
             
             GameClassicFactory.nextQuestion();
             $scope.modeSpecialOnAnswer(isTrue);
+            
+            // Apply the animations
+            $scope.rotateQuestions();
+            $scope.updateScore();
             
         };
         $scope.modeSpecialOnAnswer = function(answer) {

@@ -5,7 +5,7 @@
   <!-- Status bar -->  
   <div class="col-md-6 col-centered">
     <div class="progress active">
-      <div ng-repeat="question in questions | filterAnswered" class="progress-bar {{ question.style }}" style="width: {{ 100 / questions.length }}%">
+      <div ng-repeat="question in game.questions | filterAnswered" class="progress-bar {{ question.style }}" style="width: {{ 100 / questions.length }}%">
         <span ng-show="question.isTrue && questions.length<30">+10</span>
         <span ng-show="question.isTrue===false && questions.length<30">-5</span>
       </div>
@@ -15,7 +15,7 @@
   <!-- Answered questions -->
   <div class="col-md-6 col-centered">
   <ul class="results">
-    <li ng-repeat="question in questions | filterAnswered">
+    <li ng-repeat="question in game.questions | filterAnswered">
         <div class="result question {{ question.isTrue }}">{{ question.option1 }} </div>
         <div class="result answer">
             <span ng-show="question.answer == '?'" class="glyphicon glyphicon-flag"></span>

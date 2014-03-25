@@ -12,17 +12,24 @@ easyMathServices.value('version', '0.1');
 easyMathServices.service('TimerService', function($timeout) {
     
     var time = null;
+    var finishTime = null;
     var timeout = null;
     
     var TIME_STEP = 100;
     
     var init = function(minutes, seconds) {
-        time = (minutes*60 + seconds)*1000;
+        var currentTime = new Date();
+        var newTime = (minutes*60 + seconds)*1000;
+        finishTime = new Date();
+        time = new Date();
+        
+        finishTime.setTime(currentTime.getTime() + newTime);
     };
     
     var tick = function() {
-        
-        time -= TIME_STEP;    
+        var currentTime = new Date();
+        time.setTime(finishTime.getTime() - currentTime.getTime());
+        //time -= TIME_STEP;    
         //show();
         
     };
@@ -39,7 +46,9 @@ easyMathServices.service('TimerService', function($timeout) {
     };
     
     var addTime = function(minutes, seconds) {
-        time += (minutes*60 + seconds)*1000;
+        var newTime = (minutes*60 + seconds)*1000;
+        
+        finishTime.setTime(finishTime.getTime() + newTime);
     };
     
     this.init = init;
@@ -47,7 +56,7 @@ easyMathServices.service('TimerService', function($timeout) {
     this.show = show;
     this.getTime = getTime;
     this.addTime = addTime;
-    
+    this.time = time;
 });
 
 
@@ -185,26 +194,17 @@ easyMathServices.service('SoundsService', function($timeout) {
     
     var init = function() {
         themeSong = new Audio(themeSongRes);
-        //themeSong = new Audio(themeSongRes);
-        
-        //themeSong.setAttribute('loop', 'true'); я сега
-        //themeSong.setAttribute('controls', 'controls');
         themeSong.setAttribute('preload', 'auto');
     
         document.body.appendChild(themeSong);
-        /*
-        themeSong.addEventListener('canplay', function() {
-            themeSong.addEventListener('ended', function() {
-                themeSong.load();
-                themeSong.play();
-            });
-        });*/
         themeSong.addEventListener('ended', function() {
             themeSong.load();
             themeSong.play();
         });
         //themeSong.setAttribute('src', themeSongRes); // tova daje he trugva :D даи бровсер
         themeSong.load(); // stiga sahse ne stava :D basi mamata :X:X:X nali..
+        
+        answerSuccess.setAttribute("preload", "auto");
         
     };
     init();
@@ -218,11 +218,13 @@ easyMathServices.service('SoundsService', function($timeout) {
     };
     
     this.playSuccess = function() {
-        answerSuccess.load();
+        //answerSuccess.load();
+        answerSuccess.currentTime = 0;
         answerSuccess.play();
     };
     this.playError = function() {
-        answerError.load();
+        //answerError.load();
+        answerError.currentTime = 0;
         answerError.play();
     };
     this.playFinish = function() {
@@ -343,7 +345,7 @@ easyMathServices.factory('GameClassicFactory', function($interval) {
     
     // GAME SPECIFICATIONS
     var questionsCount = 10;
-    var STEP_TIMER = 100;
+    var STEP_TIMER = 300;
     factory.questionPoints = 10;
     
     factory.score = 0;
@@ -351,6 +353,7 @@ easyMathServices.factory('GameClassicFactory', function($interval) {
     factory.questions = null;
     factory.currentQuestion = null;
     factory.gameStatus = 0;
+    factory.time = null;
     
     factory.QuestionsService = null;
     factory.TimerService = null;
@@ -364,6 +367,8 @@ easyMathServices.factory('GameClassicFactory', function($interval) {
         factory.QuestionsService = QuestionsService;
         factory.TimerService = TimerService;
         factory.gameDuration = duration;
+        
+        factory.time = factory.TimerService.time;
         
     };
 
