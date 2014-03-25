@@ -219,12 +219,16 @@ easyMathServices.service('SoundsService', function($timeout) {
     
     this.playSuccess = function() {
         //answerSuccess.load();
-        answerSuccess.currentTime = 0;
+        if (answerSuccess) {
+            answerSuccess.currentTime = 0;
+        }
         answerSuccess.play();
     };
     this.playError = function() {
         //answerError.load();
-        answerError.currentTime = 0;
+        if (answerError) {
+            answerError.currentTime = 0;
+        }
         answerError.play();
     };
     this.playFinish = function() {

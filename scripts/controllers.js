@@ -114,22 +114,6 @@ angular.module('easyMath.controllers', []).
         $scope.$watch('$viewContentLoaded', function(){
             $scope.init();
         });
-        
-        $scope.watching = {  };
-                 
-       /*
-        $scope.$watch(function () { return GameClassicFactory.currentQuestion; },
-            function (value) {
-                $scope.currentQuestion = value;
-                $scope.rotateQuestions(); // Apply the animation
-            }
-        );
-        $scope.$watch(function () { return GameClassicFactory.questions; },
-            function (value) {
-                $scope.questions = value;
-            }
-        );
-        */
                                            
         // Watch for changes in high score
         $scope.$watch(function () { return HighScoreService.timelimitUpdated; },
@@ -243,19 +227,18 @@ angular.module('easyMath.controllers', []).
             GameClassicFactory.skipQuestion(GameClassicFactory.currentQuestion); 
         };
         $scope.setAnswer = function(answer) {
-            if ($scope.gameStatus !== 2)
+            if ($scope.game.gameStatus !== 2)
                 return;
+            
+            // Apply the animations
+            $scope.rotateQuestions();
+            $scope.updateScore();
             
             GameClassicFactory.currentQuestion.answer = answer;
             var isTrue = QuestionsService.checkAnswer(GameClassicFactory.currentQuestion, answer);
             
             GameClassicFactory.nextQuestion();
             $scope.modeSpecialOnAnswer(isTrue);
-            
-            // Apply the animations
-            $scope.rotateQuestions();
-            $scope.updateScore();
-            
         };
         $scope.modeSpecialOnAnswer = function(answer) {
             if (answer) {
@@ -313,7 +296,7 @@ angular.module('easyMath.controllers', []).
             addChange();
             setTimeout(function() {
                 removeChange();
-            }, 500);
+            }, 600);
         };
         $scope.updateScore = function() {
             $scope.scoreDiv = angular.element(".score");
