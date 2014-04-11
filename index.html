@@ -5,19 +5,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     
-  <title>Easy-math</title>
-  <link rel="stylesheet" href="styles/app.css"/>
-    
   <meta name="author" content="Valentin Kirilov">
-  <meta name="description" content="">
+  <meta name="description" content="It's a simple game that challenges your brain and speed of reaction with a simple math problems. 
+                                    The game has a few different modes for playing and it allows you to play different levels and difficulties.">
+  <meta name="keywords" content="easy-math, easy, math, games, math game, flat, simple">
     
+  <title>Easy-math - Challenge your brain with simple problems</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
     
-  <!-- Bootstrap -->
-  <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- In production -->
+  <!-- -->
+  <link rel="stylesheet" href="styles/easy-math.min.css"/>
+  <!-- -->
+  
+  <!-- During dev -->
+  <!--
+  <link rel="stylesheet" href="styles/app.css"/>
+  -->
     
-  <!-- Custom styles for this template -->
+  <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/templates/starter-template.css" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,7 +47,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">
-            <img src="images/icon-32.png" />
+            <img src="images/icon-32.png" alt="icon" />
             Easy-math
           </a>
         </div>
@@ -61,44 +68,36 @@
           <div ng-view></div>
           <div ng-include src="'partials/footer.html'"></div>
       </div>
-        
-      
 
     </div><!-- /.container -->
     
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="libs/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-    
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="libs/angular/angular.js"></script>
-  <script src="libs/angular/angular-route.js"></script>
-  <script src="libs/angular/angular-animate.js"></script>
+  
+  <script src="libs/angular.min.js"></script>
+  <script src="libs/angular/angular-route.min.js"></script>
+  <script src="libs/angular/angular-animate.min.js"></script>
   <script src="libs/angular/angular-cookies.min.js"></script>
 
   <!-- In production -->
-  <!--
-  <script src="scripts/app.min.js"></script>
-  <script src="scripts/services.min.js"></script>
-  <script src="scripts/controllers.min.js"></script>
-  <script src="scripts/filters.min.js"></script>
-  <script src="scripts/directives.min.js"></script>
-  -->
+  <!-- -->
+  <script src="scripts/easy-math.js"></script>
+  <!-- -->
     
   <!-- During dev -->
-  <!-- -->
+  <!--
+  <script src="libs/angular/angular.js"></script>
+  
   <script src="scripts/app.js"></script>
   <script src="scripts/services.js"></script>
   <script src="scripts/controllers.js"></script>
   <script src="scripts/filters.js"></script>
   <script src="scripts/directives.js"></script>
-  <!-- -->
+   -->
   
   <script src="libs/ui-bootstrap-tpls-0.10.0.min.js"></script>
   <script src="libs/Rdb.Js/js/rdbhost-angular.js"></script>
-    <script src="libs/Rdb.Js/js/jquery.rdbhost.js"></script>
+  <script src="libs/Rdb.Js/js/jquery.rdbhost.js"></script>
 </body>
 </html>

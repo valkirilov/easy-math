@@ -1,0 +1,16 @@
+{
+  "name": "easy-math",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-css": "~0.5.4",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.4.0",
+    "grunt-contrib-jshint": "~0.5.2",
+    "grunt-contrib-watch": "~0.4.3",
+    "grunt-contrib-uglify": "~0.2.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
