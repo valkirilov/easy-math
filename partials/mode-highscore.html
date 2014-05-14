@@ -14,6 +14,16 @@
             <td class="text-left">{{ result[1] }}</td>
             <td>{{ result[2] }}</td>
         </tr>
+        <tr ng-if="highscores === null" class="info">
+            <td><strong>{{ HighScoreService  }}</strong></td>
+            <td class="text-left">Your score</td>
+            <td>{{ game.score }}</td>
+        </tr>
+        <tr ng-if="currentScore < highscores[9]" class="info">
+            <td><strong>{{ currentScore.id }}</strong></td>
+            <td class="text-left">{{ currentScore[1] }}</td>
+            <td>{{ currentScore[2] }}</td>
+        </tr>
     </table>
       
   </div>

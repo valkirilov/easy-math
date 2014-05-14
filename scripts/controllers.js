@@ -149,7 +149,13 @@ angular.module('easyMath.controllers', []).
                     var newScore = [ null, name, $scope.score, new Date().toDateString(), 'ip here'];
                     var tableName = ($scope.mode.type == 'classic') ? 'score_classic' : 'score_timelimit';
                     
+                    $scope.currentScore = newScore;
+                    console.log('Game finish');
+                    console.log(HighScoreService);
+                    console.log($scope.highscore);
+                    
                     DatabaseService.addTableData(tableName, newScore, function(success) {
+                        console(success);
                         $scope.currentScore = DatabaseService.getLatestAddedId();
 
                         if ($scope.mode.type == 'timelimit') {
@@ -163,24 +169,13 @@ angular.module('easyMath.controllers', []).
                             $timeout(HighScoreService.fetchClassic, 300);
                         }
                         
+                    }, function(error) {
+                        console.log('error');
                     });
                 }
             }
         );
                                            
-        /*
-        $scope.$watch(function () { return GameClassicFactory.score; },
-            function (value) { $scope.score = value; $scope.updateScore(); }
-        );
-               */                                /*
-        $scope.$watch(function () { return GameClassicFactory.time; },
-            function (value) { $scope.time = { 
-                min: Math.floor(value/60000), 
-                sec: (value <= 3600) ? parseInt(value/1000) : parseInt((value-(Math.floor(value/60000)*60000))/1000), 
-                milisec: value%1000 }; }
-        );
-        */
-
         
         // Some controller values
         //$scope.questions = null;
@@ -189,6 +184,7 @@ angular.module('easyMath.controllers', []).
         $scope.game = GameClassicFactory;
         $scope.mode = null;
         $scope.highscores = null;
+        $scope.currentScore = null;
                                            
         $scope.mute = {
             music: false,
@@ -198,6 +194,7 @@ angular.module('easyMath.controllers', []).
 
         $scope.init = function() {
             
+            $scope.HighScoreService = HighScoreService;
             HighScoreService.init();
             
             if ($route.current.templateUrl === 'partials/mode-classic.html') {
