@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         concat: {
             js: {
                 src: 'scripts/*.js',
-                dest: 'scripts/easy-math.js'
+                dest: 'dist/easy-math.js'
             },
             css: {
                 src: 'styles/*.css',
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             my_target: {
-                files: {'scripts/easy-math.min.js': ['scripts/easy-math.js']}
+                files: {'dist/easy-math.min.js': ['dist/easy-math.js']}
             }
         },
 		cssmin: {

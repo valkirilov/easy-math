@@ -146,7 +146,7 @@ angular.module('easyMath.controllers', []).
         $scope.$watch(function () { return GameClassicFactory.gameStatus; },
             function (value) {
                 $scope.gameStatus = value;
-                console.log('Changeeeed' + value);
+
                 // Game end
                 if ($scope.gameStatus == 3) {
                     angular.element('.score').addClass('final');
