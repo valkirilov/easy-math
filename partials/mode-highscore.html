@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-centered">
     <h1>Highscores</h1>
-    
+
     <table class="table table-striped">
         <tr>
             <td><strong>#</strong></td>
@@ -15,12 +15,12 @@
             <td>{{ result[2] }}</td>
         </tr>
         <tr ng-if="highscores === null" class="info">
-            <td><strong>{{ HighScoreService  }}</strong></td>
-            <td class="text-left">Your score</td>
-            <td>{{ game.score }}</td>
+            <td><strong></strong></td>
+            <td class="text-left">{{ currentScore[1] }}</td>
+            <td>{{ currentScore[2] }}</td>
         </tr>
-        <tr ng-if="currentScore < highscores[9]" class="info">
-            <td><strong>{{ currentScore.id }}</strong></td>
+        <tr ng-if="game.score < highscores[highscores.length-1][2]" class="info">
+            <td>{{ currentScore[0] }}</td>
             <td class="text-left">{{ currentScore[1] }}</td>
             <td>{{ currentScore[2] }}</td>
         </tr>

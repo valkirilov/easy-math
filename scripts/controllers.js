@@ -110,6 +110,22 @@ angular.module('easyMath.controllers', []).
                                        function($scope, $route, $timeout, $interval, $location, QuestionsService, TimerService, 
                                                  GameClassicFactory, SoundsService, DatabaseService, NameService, HighScoreService, $cookies, $cookieStore) {
 
+                                           
+        // Some controller values
+        //$scope.questions = null;
+        //$scope.currentQuestion = null;
+
+        $scope.game = GameClassicFactory;
+        $scope.mode = null;
+        $scope.highscores = null;
+        //$scope.currentScore = null;
+                                           
+        $scope.mute = {
+            music: false,
+            sounds: false,
+        };
+                     
+        
         // Watch for changes in views and call init function when the view is loaded
         $scope.$watch('$viewContentLoaded', function(){
             $scope.init();
@@ -130,7 +146,7 @@ angular.module('easyMath.controllers', []).
         $scope.$watch(function () { return GameClassicFactory.gameStatus; },
             function (value) {
                 $scope.gameStatus = value;
-                
+                console.log('Changeeeed' + value);
                 // Game end
                 if ($scope.gameStatus == 3) {
                     angular.element('.score').addClass('final');
@@ -146,17 +162,13 @@ angular.module('easyMath.controllers', []).
                         HighScoreService.playerName = name;
                         $cookieStore.put('playerName', name);
                     }
-                    var newScore = [ null, name, $scope.score, new Date().toDateString(), 'ip here'];
+                    var newScore = [ null, name, $scope.game.score, new Date().toDateString(), 'ip here'];
                     var tableName = ($scope.mode.type == 'classic') ? 'score_classic' : 'score_timelimit';
                     
                     $scope.currentScore = newScore;
-                    console.log('Game finish');
-                    console.log(HighScoreService);
-                    console.log($scope.highscore);
                     
                     DatabaseService.addTableData(tableName, newScore, function(success) {
-                        console(success);
-                        $scope.currentScore = DatabaseService.getLatestAddedId();
+                        $scope.currentScore[0] = DatabaseService.getLatestAddedId();
 
                         if ($scope.mode.type == 'timelimit') {
                             $cookieStore.put('timelimitScore', $scope.score);
@@ -169,28 +181,11 @@ angular.module('easyMath.controllers', []).
                             $timeout(HighScoreService.fetchClassic, 300);
                         }
                         
-                    }, function(error) {
-                        console.log('error');
                     });
                 }
             }
         );
-                                           
-        
-        // Some controller values
-        //$scope.questions = null;
-        //$scope.currentQuestion = null;
-
-        $scope.game = GameClassicFactory;
-        $scope.mode = null;
-        $scope.highscores = null;
-        $scope.currentScore = null;
-                                           
-        $scope.mute = {
-            music: false,
-            sounds: false,
-        };
-                                           
+                                                                 
 
         $scope.init = function() {
             
