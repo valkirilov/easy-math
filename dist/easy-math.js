@@ -6,11 +6,14 @@ angular.module('easyMath', [
 	'ngRoute',
     'ngAnimate',
     'ngCookies',
+    'ipCookie',
 	'easyMath.filters',
 	'easyMath.services',
 	'easyMath.directives',
 	'easyMath.controllers',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angulartics', 
+    'angulartics.google.analytics'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeController'});
@@ -130,9 +133,9 @@ angular.module('easyMath.controllers', []).
 
     }]).
     controller('TimelimitController', ['$scope', '$route', '$timeout',  '$interval', '$location', 'QuestionsService', 'TimerService', 
-                                       'GameClassicFactory', 'SoundsService', 'DatabaseService', 'NameService', 'HighScoreService', '$cookies', '$cookieStore',
+                                       'GameClassicFactory', 'SoundsService', 'DatabaseService', 'NameService', 'HighScoreService', '$cookies', '$cookieStore', 'ipCookie',
                                        function($scope, $route, $timeout, $interval, $location, QuestionsService, TimerService, 
-                                                 GameClassicFactory, SoundsService, DatabaseService, NameService, HighScoreService, $cookies, $cookieStore) {
+                                                 GameClassicFactory, SoundsService, DatabaseService, NameService, HighScoreService, $cookies, $cookieStore, ipCookie) {
 
                                            
         // Some controller values
@@ -179,12 +182,15 @@ angular.module('easyMath.controllers', []).
                     
                     // Generate name and save the result
                     var name;
-                    if (HighScoreService.playerName)
+                    if (HighScoreService.playerName) {
+                        console.log('We have a name: ' + HighScoreService.playerName);
                         name = HighScoreService.playerName;
+                    }
                     else {
+                        console.log('Generating a name');
                         name = NameService.getName();
                         HighScoreService.playerName = name;
-                        $cookieStore.put('playerName', name);
+                        ipCookie('playerName', name, { expires: 365 });
                     }
                     var newScore = [ null, name, $scope.game.score, new Date().toDateString(), 'ip here'];
                     var tableName = ($scope.mode.type == 'classic') ? 'score_classic' : 'score_timelimit';
@@ -195,12 +201,12 @@ angular.module('easyMath.controllers', []).
                         $scope.currentScore[0] = DatabaseService.getLatestAddedId();
 
                         if ($scope.mode.type == 'timelimit') {
-                            $cookieStore.put('timelimitScore', $scope.score);
+                            ipCookie('timelimitScore', $scope.score);
                             HighScoreService.fetchTimelimit();  
                             $timeout(HighScoreService.fetchTimelimit, 300);
                         }
                         else if ($scope.mode.type == 'classic') {
-                            $cookieStore.put('classicScore', $scope.score);
+                            ipCookie('classicScore', $scope.score);
                             HighScoreService.fetchClassic();  
                             $timeout(HighScoreService.fetchClassic, 300);
                         }
@@ -535,7 +541,7 @@ easyMathServices.service('DatabaseService', function($timeout) {
     
 });
 
-easyMathServices.factory('HighScoreService', function(DatabaseService, $cookies, $cookieStore) {
+easyMathServices.factory('HighScoreService', function(DatabaseService, $cookies, $cookieStore, ipCookie) {
     
     var highscores = {}; 
     
@@ -545,9 +551,10 @@ easyMathServices.factory('HighScoreService', function(DatabaseService, $cookies,
     highscores.timelimitUpdated = 0;
     highscores.classicUpdated = 0;
     
-    highscores.playerName = $cookieStore.get('playerName');
-    highscores.classicYourScore = $cookieStore.get('classicScore');
-    highscores.timelimitYourScore = $cookieStore.get('timelimitScore');
+    highscores.playerName = ipCookie('playerName');
+    highscores.classicYourScore = ipCookie('classicScore');
+    highscores.timelimitYourScore = ipCookie('timelimitScore');
+    console.log(highscores);
     
     var fetchClassic = function() {
         // Select and display the highscore table
