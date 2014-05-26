@@ -11,9 +11,7 @@ angular.module('easyMath', [
 	'easyMath.services',
 	'easyMath.directives',
 	'easyMath.controllers',
-    'ui.bootstrap',
-    'angulartics', 
-    'angulartics.google.analytics'
+    'ui.bootstrap'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeController'});
@@ -183,11 +181,11 @@ angular.module('easyMath.controllers', []).
                     // Generate name and save the result
                     var name;
                     if (HighScoreService.playerName) {
-                        console.log('We have a name: ' + HighScoreService.playerName);
+                        //console.log('We have a name: ' + HighScoreService.playerName);
                         name = HighScoreService.playerName;
                     }
                     else {
-                        console.log('Generating a name');
+                        //console.log('Generating a name');
                         name = NameService.getName();
                         HighScoreService.playerName = name;
                         ipCookie('playerName', name, { expires: 365 });
@@ -201,12 +199,19 @@ angular.module('easyMath.controllers', []).
                         $scope.currentScore[0] = DatabaseService.getLatestAddedId();
 
                         if ($scope.mode.type == 'timelimit') {
-                            ipCookie('timelimitScore', $scope.score);
+                            if (HighScoreService.timelimitYourScore < $scope.game.score) {
+                                ipCookie('timelimitScore', $scope.game.score);
+                                HighScoreService.timelimitYourScore = $scope.game.score;
+                            }
                             HighScoreService.fetchTimelimit();  
                             $timeout(HighScoreService.fetchTimelimit, 300);
                         }
                         else if ($scope.mode.type == 'classic') {
-                            ipCookie('classicScore', $scope.score);
+                            if (HighScoreService.classicYourScore < $scope.game.score) {
+                                HighScoreService.classicYourScore = $scope.game.score;
+                                ipCookie('classicScore', $scope.game.score);
+                            }
+                            
                             HighScoreService.fetchClassic();  
                             $timeout(HighScoreService.fetchClassic, 300);
                         }
@@ -552,9 +557,8 @@ easyMathServices.factory('HighScoreService', function(DatabaseService, $cookies,
     highscores.classicUpdated = 0;
     
     highscores.playerName = ipCookie('playerName');
-    highscores.classicYourScore = ipCookie('classicScore');
-    highscores.timelimitYourScore = ipCookie('timelimitScore');
-    console.log(highscores);
+    highscores.classicYourScore = ipCookie('classicScore') || 0;
+    highscores.timelimitYourScore = ipCookie('timelimitScore') || 0;
     
     var fetchClassic = function() {
         // Select and display the highscore table
