@@ -19,8 +19,8 @@ module.exports = function(grunt) {
         },
 		cssmin: {
             css:{
-                src: 'styles/easy-math.css',
-                dest: 'styles/easy-math.min.css'
+                src: 'styles/app.css',
+                dest: 'styles/app.min.css'
             }
         }
 	});

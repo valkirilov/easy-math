@@ -217,8 +217,8 @@
     -webkit-animation: updateScore 0.5s;
 }
 .score.final {
-    font-size: 48pt;
-    line-height: 48pt;
+    font-size: 48pt !important;
+    line-height: 48pt !important;
     color: #2ecc71;
 }
 
