@@ -8,7 +8,7 @@ This project is build with the best Superheroic JavaScript MVW Framework  (for m
 The game is hosted on GitHub and is available here: [http://valkirilov.github.io/easy-math](http://valkirilov.github.io/easy-math)
 
 <p align="center">
-  <img src="https://github.com/valkirilov/easy-math/blob/master/app/images/screenshots/game-croped.png?raw=true" alt="Screenshot"/>
+  <img src="https://github.com/valkirilov/easy-math/blob/master/images/screenshots/game-croped.png?raw=true" alt="Screenshot"/>
 </p>
 
 Just for fun
