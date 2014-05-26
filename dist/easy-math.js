@@ -11,7 +11,9 @@ angular.module('easyMath', [
 	'easyMath.services',
 	'easyMath.directives',
 	'easyMath.controllers',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angulartics', 
+    'angulartics.google.analytics'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeController'});
