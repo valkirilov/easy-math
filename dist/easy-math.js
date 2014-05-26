@@ -11,9 +11,7 @@ angular.module('easyMath', [
 	'easyMath.services',
 	'easyMath.directives',
 	'easyMath.controllers',
-    'ui.bootstrap',
-    'angulartics', 
-    'angulartics.google.analytics'
+    'ui.bootstrap'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeController'});
@@ -201,17 +199,21 @@ angular.module('easyMath.controllers', []).
                         $scope.currentScore[0] = DatabaseService.getLatestAddedId();
 
                         if ($scope.mode.type == 'timelimit') {
+                            console.log("Old: " + HighScoreService.timelimitYourScore + "; New: " + $scope.game.score);
                             if (HighScoreService.timelimitYourScore < $scope.game.score) {
-                                ipCookie('timelimitScore', $scope.game.score);
+                                console.log('New high score');
+                                ipCookie('timelimitScore', $scope.game.score, { expires: 365 });
                                 HighScoreService.timelimitYourScore = $scope.game.score;
                             }
                             HighScoreService.fetchTimelimit();  
                             $timeout(HighScoreService.fetchTimelimit, 300);
                         }
                         else if ($scope.mode.type == 'classic') {
+                            console.log("Old: " + HighScoreService.classicYourScore + "; New: " + $scope.game.score);
                             if (HighScoreService.classicYourScore < $scope.game.score) {
+                                console.log('New high score');
                                 HighScoreService.classicYourScore = $scope.game.score;
-                                ipCookie('classicScore', $scope.game.score);
+                                ipCookie('classicScore', $scope.game.score,  { expires: 365 });
                             }
                             
                             HighScoreService.fetchClassic();  

@@ -174,7 +174,9 @@ angular.module('easyMath.controllers', []).
                         $scope.currentScore[0] = DatabaseService.getLatestAddedId();
 
                         if ($scope.mode.type == 'timelimit') {
+                            console.log("Old: " + HighScoreService.timelimitYourScore + "; New: " + $scope.game.score);
                             if (HighScoreService.timelimitYourScore < $scope.game.score) {
+                                console.log('New high score');
                                 ipCookie('timelimitScore', $scope.game.score, { expires: 365 });
                                 HighScoreService.timelimitYourScore = $scope.game.score;
                             }
@@ -182,7 +184,9 @@ angular.module('easyMath.controllers', []).
                             $timeout(HighScoreService.fetchTimelimit, 300);
                         }
                         else if ($scope.mode.type == 'classic') {
+                            console.log("Old: " + HighScoreService.classicYourScore + "; New: " + $scope.game.score);
                             if (HighScoreService.classicYourScore < $scope.game.score) {
+                                console.log('New high score');
                                 HighScoreService.classicYourScore = $scope.game.score;
                                 ipCookie('classicScore', $scope.game.score,  { expires: 365 });
                             }
