@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-centered">
+    <h1>Highscores</h1>
+    <table class="table table-striped">
+        <tr>
+            <td><strong>#</strong></td>
+            <td><strong>Name</strong></td>
+            <td><strong>Score</strong></td>
+        </tr>
+
+        <tr ng-repeat="result in highscores track by $index" class="{{ (currentScore[1] == result[1] && currentScore[2] == result[2]) ? 'info' : '' }}">
+            <td><strong>{{ $index+1 }}</strong></td>
+            <td class="text-left">{{ result[1] }}</td>
+            <td>{{ result[2] }}</td>
+        </tr>
+        <tr ng-if="highscores === null" class="info">
+            <td><strong></strong></td>
+            <td class="text-left">{{ currentScore[1] }}</td>
+            <td>{{ currentScore[2] }}</td>
+        </tr>
+        <tr ng-if="game.score <= highscores[highscores.length-1][2]" class="info">
+            <td>{{ currentScore[0] }}</td>
+            <td class="text-left">{{ currentScore[1] }}</td>
+            <td>{{ currentScore[2] }}</td>
+        </tr>
+    </table>
+      
+  </div>
+  <br />
+</div>
