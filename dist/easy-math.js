@@ -22,6 +22,10 @@ config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/timelimit', {templateUrl: 'partials/mode-timelimit.html', controller: 'TimelimitController'});
     $routeProvider.when('/highscores', {templateUrl: 'partials/highscores.html', controller: 'HomeController'});
 	$routeProvider.otherwise({redirectTo: '/home'});
+}]).
+config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With']; 
 }]);
 
 'use strict';
