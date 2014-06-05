@@ -493,7 +493,7 @@ easyMathServices.service('NameService', function($timeout) {
     
     var objects = ['Lion', 'Beef', 'Bed', 'Cow' ,'Bananas', 'Hamster', 'Rhino', 'Knife', 'Tiger', 
                    'Phone', 'Dog', 'Bottle', 'Squirrel', 'Crow', 'Apple', 'Sheep', 'Panda', 
-                   'Zebra', 'Lamp', 'Giraffe', 'Chicken', '', '', '', ''];
+                   'Zebra', 'Lamp', 'Giraffe', 'Chicken'];
     
     var adjectives = ['impossible', 'inexpensive', 'innocent', 'inquisitive', 'modern', 'mushy', 'odd', 
                       'open', 'outstanding', 'poor', 'powerful', 'prickly', 'puzzled', 'real', 'rich', 

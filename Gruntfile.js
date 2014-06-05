@@ -6,11 +6,11 @@ module.exports = function(grunt) {
             js: {
                 src: 'scripts/*.js',
                 dest: 'dist/easy-math.js'
-            },
-            css: {
-                src: 'styles/*.css',
-                dest: 'styles/easy-math.css'
             }
+//            css: {
+//                src: 'styles/*.css',
+//                dest: 'styles/easy-math.css'
+//            }
         },
         uglify: {
             my_target: {

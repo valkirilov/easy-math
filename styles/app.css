@@ -59,8 +59,8 @@
     box-shadow: 0px 0px 21px rgba(128, 128, 128, 0.6);
     
     padding: 10px 20px;
-    font-size: 3em;
-    
+    font-size: 2.1em;
+    display: inline-block;
     
     transition:         1s;
     -webkit-transition: 1s;
@@ -81,14 +81,6 @@
     -moz-transform:     rotateY(0deg);
     */
     
-}
-.result.question {
-    box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.6);
-    
-    float: left;
-    
-    padding: 5px;
-    font-size: 1em;
 }
 
 .answer-checked,
@@ -141,6 +133,21 @@
     box-shadow:         0px 0px 21px rgba(128, 0, 0, 0.6);
 }
 
+
+/* These are the answer classes */
+.answer {
+    margin: 10px;
+}
+
+/** Results stules */
+.result.question {
+    box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.6);
+    
+    float: left;
+    
+    padding: 5px;
+    font-size: 1em;
+}
 .result.question.true {
     /*background-color:   rgba(0, 128, 0, 0.1);*/
     border:             1px solid rgba(0, 128, 0, 0.3);
@@ -152,10 +159,6 @@
     box-shadow:         0px 0px 6px rgba(128, 0, 0, 0.6);
 }
 
-/* These are the answer classes */
-.answer {
-    margin-top: 0px;
-}
 .result.answer {
     margin: 5px;
     float: left;
@@ -183,6 +186,8 @@
 .results li.ng-enter-active {
     opacity: 1;
 }
+
+
 
 .btn-answer {
     padding: 20px !important;
@@ -368,8 +373,39 @@
 @media (min-width: 768px) {
     .question {
         padding: 30px;
-        font-size: 5em;
+        font-size: 4.5em;
     }
+    .question.align-left {
+        float: left;
+    }
+    .question.align-right {
+        float: right;
+    }
+    
+    .answer {
+        margin-top: 30px;
+    }
+    
+    
+    .timer {
+        margin: 10px auto;
+    }
+    .timer div {
+        font-size: 42pt;
+        position: relative;
+        text-align: center;
+        margin: 2px;
+    }
+    .timer .delimer {
+        margin-bottom: 26px;
+        font-size: 42pt;
+        height: 42pt;
+    }
+}
+
+/* Here are the media queries for small screens*/ 
+/* Smartphones (portrait) */
+@media only screen and (min-device-width: 320px) {
     
     .answer {
         margin-top: 30px;
