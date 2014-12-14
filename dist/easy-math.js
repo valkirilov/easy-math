@@ -11,8 +11,7 @@ angular.module('easyMath', [
 	'easyMath.services',
 	'easyMath.directives',
 	'easyMath.controllers',
-    'ui.bootstrap',
-    'angulartics', 'angulartics.google.analytics'
+    'ui.bootstrap'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeController'});
@@ -20,6 +19,7 @@ config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'HomeController'});
     $routeProvider.when('/classic', {templateUrl: 'partials/mode-classic.html', controller: 'TimelimitController'});
     $routeProvider.when('/timelimit', {templateUrl: 'partials/mode-timelimit.html', controller: 'TimelimitController'});
+    $routeProvider.when('/embeded', {templateUrl: 'partials/mode-embeded.html', controller: 'HomeController'});
     $routeProvider.when('/highscores', {templateUrl: 'partials/highscores.html', controller: 'HomeController'});
 	$routeProvider.otherwise({redirectTo: '/home'});
 }]).
@@ -70,7 +70,7 @@ angular.module('easyMath.controllers', []).
         };
         
         $scope.generateQuestion = function() {
-            if ($location.path() === '/home') {
+            if ($location.path() === '/home' || $location.path() === '/embeded') {
                 $scope.currentQuestion = QuestionsService.generateQuestion(1);
                 $scope.rotatePreview();
             }
@@ -95,11 +95,11 @@ angular.module('easyMath.controllers', []).
                 setTimeout(function() {    
                     $scope.option2.addClass('change');
                 }, 100);
-            }
+            };
             var removeChange = function() {
                 $scope.option1.removeClass('change');
                 $scope.option2.removeClass('change');
-            }
+            };
             
             if ($scope.option2.hasClass('change')) {
                 removeChange();

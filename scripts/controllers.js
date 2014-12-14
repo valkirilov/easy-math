@@ -40,7 +40,7 @@ angular.module('easyMath.controllers', []).
         };
         
         $scope.generateQuestion = function() {
-            if ($location.path() === '/home') {
+            if ($location.path() === '/home' || $location.path() === '/embeded') {
                 $scope.currentQuestion = QuestionsService.generateQuestion(1);
                 $scope.rotatePreview();
             }
@@ -65,11 +65,11 @@ angular.module('easyMath.controllers', []).
                 setTimeout(function() {    
                     $scope.option2.addClass('change');
                 }, 100);
-            }
+            };
             var removeChange = function() {
                 $scope.option1.removeClass('change');
                 $scope.option2.removeClass('change');
-            }
+            };
             
             if ($scope.option2.hasClass('change')) {
                 removeChange();

@@ -1,6 +1,16 @@
-<div class="container">
-    <div class="row">
+<style type="text/css">
+    .navbar {
+        display: none;
+    }
 
+    .container {
+        margin-top: -21px;
+    }
+</style>
+
+<div class="container">
+    
+    <div class="row">
         <div class="col-xs-6 col-sm-4 col-lg-5">
             <div id="option1" class="question preview align-right {{ (currentQuestion.isTrue != undefined) ? ((currentQuestion.isTrue) ? 'true' : 'false') : '' }}">{{ currentQuestion.option1 }}</div>
         </div>
@@ -21,4 +31,19 @@
             <div id="option2" class="question preview align-left {{ (currentQuestion.isTrue != undefined) ? ((currentQuestion.isTrue) ? 'true' : 'false') : '' }}">{{ currentQuestion.option2 }}</div>
         </div>
     </div>
+
+    <br />
+    <p class="hidden-xs">
+        <br /><br />
+    </p>
+
+    <div class="col-sm-6 center-block alert alert-info">
+    Play Easy-math and compete with the other players <span class="hidden-xs">for FREE only now</span> on <a href="http://valkirilov.github.io/easy-math" target="_blank">valkirilov.github.io/easy-math</a>
+    </div>
+    
+    <br />
+    
+    <!-- How to play -->
+    <!-- <div ng-include src="'partials/how-to-play/timelimit.html'"></div> -->
+
 </div>
