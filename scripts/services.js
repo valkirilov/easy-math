@@ -179,7 +179,8 @@ easyMathServices.service('SoundsService', function($timeout) {
     var tickSoundRes = "sounds/tick-cca3.wav";
     var finishSoundRes = "sounds/complete-cca3.wav"
     
-    var themeSongRes = "sounds/theme-cc0.wav";
+    //var themeSongRes = "sounds/theme-cc0.wav";
+    var themeSongRes = "sounds/theme-cc0.mp3";
     var testRes = "http://soundbible.com/grab.php?id=989&type=mp3";
     
     // Sound variables
