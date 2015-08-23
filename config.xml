@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "easy-math.io.github.valkirilov"
+        versionCode = "10" 
+        version     = "1.0.0" >
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Easy-math</name>
+
+    <description>
+        It's a simple game that challenges your brain and speed of reaction with a simple math problems. The game has a few different modes for playing and it allows you to play different levels and difficulties.
+    </description>
+
+    <author href="https://valkirilov.github.io" email="val.kirilov@gmail.com">
+        Valentin Kirilov
+    </author>
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <gap:platform name="winphone" />
+
+    <icon src="logo.png" />
+
+</widget>
